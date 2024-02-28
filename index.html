@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenAI Prompt Generator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>OpenAI Prompt Generator</h1>
+        <form id="prompt-form" method="POST">
+            <div class="form-group">
+                <label for="prompt-input">Enter your prompt:</label>
+                <input type="text" class="form-control" id="prompt-input" name="prompt" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Generate response</button>
+        </form>
+        <br>
+        <div id="response-container"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#prompt-form').submit(function(event) {
+                event.preventDefault();
+                var prompt_text = $('#prompt-input').val();
+                if (prompt_text.trim()) {
+                    $.post("/prompt", {text: prompt_text}, function(data) {
+                        $('#response-container').text(data.response);
+                    });
+                } else {
+                    alert("Please enter a prompt.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
