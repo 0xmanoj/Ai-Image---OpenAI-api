@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify ,send_from_directory
 app = Flask(__name__)
 
 # Set up OpenAI API credentials
-openai.api_key = "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"
+openai.api_key = "API_KEY"
 
 @app.route("/")
 def index():
